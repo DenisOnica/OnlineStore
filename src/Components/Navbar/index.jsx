@@ -4,14 +4,16 @@ import "./style.css";
 const NavBar = () => {
   return (
     <div className="navBar">
-      <div>
+      <div className="logo">
         <Link to="/">Home</Link>
       </div>
-      <div>
-        <Link to="/admin">Admin</Link>
-      </div>
-      <div>
-        <Link to="/cart">Cart</Link>
+      <div className="menu">
+        <div>
+          <Link to="/admin">Admin</Link>
+        </div>
+        <div>
+          <Link to="/cart">Cart</Link>
+        </div>
       </div>
     </div>
   );

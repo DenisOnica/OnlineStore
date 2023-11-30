@@ -1,3 +1,7 @@
 .navBar {
-  background-color: aqua;
+  display: flex;
+}
+
+.navBar a {
+  text-decoration: none;
 }
