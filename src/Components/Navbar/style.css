@@ -1,7 +1,14 @@
 .navBar {
   display: flex;
+  justify-content: space-around;
+  padding: 1rem;
 }
 
 .navBar a {
   text-decoration: none;
+}
+
+.navBar .menu {
+  display: flex;
+  gap: 10px;
 }
