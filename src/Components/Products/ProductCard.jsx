@@ -1,6 +1,23 @@
 import PropTypes from "prop-types";
 
 const ProductCard = (props) => {
+  const addProductToCart = (e) => {
+    let productsInCart = [];
+    if (window.localStorage.getItem("cart")) {
+      productsInCart = JSON.parse(window.localStorage.getItem("cart"));
+    }
+    const productAlreadyAdded = productsInCart.find(
+      (product) => product.id === e.target.id
+    );
+    if (productAlreadyAdded) {
+      productAlreadyAdded.qt++;
+    } else {
+      productsInCart.push({ id: e.target.id, qt: 1 });
+    }
+
+    window.localStorage.setItem("cart", JSON.stringify(productsInCart));
+  };
+
   return (
     <div
       key={props.product.id}
@@ -30,12 +47,13 @@ const ProductCard = (props) => {
           </p>
           <div className="flex items-center"></div>
         </div>
-        <a
-          href="#"
+        <button
+          id={props.product.id}
+          onClick={addProductToCart}
           className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
         >
           Add to cart
-        </a>
+        </button>
       </div>
     </div>
   );

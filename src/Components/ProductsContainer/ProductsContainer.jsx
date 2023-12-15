@@ -2,8 +2,10 @@ import PropTypes from "prop-types";
 import ProductCard from "../Products/ProductCard";
 
 const ProductsContainer = (props) => {
+  const ProductsContainerTailwindClasses =
+    "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className={ProductsContainerTailwindClasses}>
       {props.products.map((product) => (
         <div key={product.id}>
           <ProductCard product={product} />
