@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import ShoppingCartProductCard from "../Components/ShoppingCartProductCard/ShoppingCartProductCard";
 
 export const Cart = () => {
   const [products, setProducts] = useState(null);
@@ -29,6 +30,7 @@ export const Cart = () => {
       (product) => product.id === prodyctId
     );
     const indexOfProductToBeDeleted = productsInCart.indexOf(currentProduct);
+    console.log(indexOfProductToBeDeleted);
     switch (action) {
       case "decrease":
         if (currentProduct.qt > 1) currentProduct.qt--;
@@ -49,61 +51,39 @@ export const Cart = () => {
     }
   };
 
-  const decreaseQuantity = (e) => {
+  const decreaseQuantity = (productId) => {
     const productsInCart =
       JSON.parse(window.localStorage.getItem("cart")) ?? [];
-    handleProductQuantity(productsInCart, e.target.id, "decrease");
+    handleProductQuantity(productsInCart, productId, "decrease");
   };
 
-  const increaseQuantity = (e) => {
+  const increaseQuantity = (productId) => {
     const productsInCart =
       JSON.parse(window.localStorage.getItem("cart")) ?? [];
-    handleProductQuantity(productsInCart, e.target.id, "increase");
+    handleProductQuantity(productsInCart, productId, "increase");
   };
 
-  const deleteQuantity = (e) => {
+  const deleteQuantity = (productId) => {
     const productsInCart =
       JSON.parse(window.localStorage.getItem("cart")) ?? [];
-    handleProductQuantity(productsInCart, e.target.id, "delete");
+    handleProductQuantity(productsInCart, productId, "delete");
   };
 
   return products && productsInCart ? (
-    <div className=" p-10 gap-10 flex flex-col justify-center items-center">
+    <div>
       {productsInCart.map((productInCart) => {
         const product = getProductById(productInCart.id);
         return (
-          <div
-            className="flex gap-10 justify-between items-center"
+          <ShoppingCartProductCard
             key={productInCart.id}
-          >
-            <p>{product.name}</p>
-            <img width={100} src={product.imageURL} alt="product" />
-            <p>{product.price}</p>
-            <div className="flex gap-5 items-center">
-              <button
-                id={productInCart.id}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
-                onClick={decreaseQuantity}
-              >
-                -
-              </button>
-              <p>{productInCart.qt}</p>
-              <button
-                id={productInCart.id}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
-                onClick={increaseQuantity}
-              >
-                +
-              </button>
-              <button
-                id={productInCart.id}
-                className="bg-red-400 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
-                onClick={deleteQuantity}
-              >
-                delete
-              </button>
-            </div>
-          </div>
+            imageURL={product.imageURL}
+            name={product.name}
+            price={product.price}
+            qt={productInCart.qt}
+            decreaseQuantity={() => decreaseQuantity(productInCart.id)}
+            increaseQuantity={() => increaseQuantity(productInCart.id)}
+            deleteQuantity={() => deleteQuantity(productInCart.id)}
+          />
         );
       })}
     </div>
