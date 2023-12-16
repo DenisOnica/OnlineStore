@@ -24,12 +24,12 @@ export const Cart = () => {
     return product;
   };
 
-  const handleProductQuantity = (productsInCart, prodyctId, operator) => {
+  const handleProductQuantity = (productsInCart, prodyctId, action) => {
     const currentProduct = productsInCart.find(
       (product) => product.id === prodyctId
     );
     const indexOfProductToBeDeleted = productsInCart.indexOf(currentProduct);
-    switch (operator) {
+    switch (action) {
       case "decrease":
         if (currentProduct.qt > 1) currentProduct.qt--;
         break;
@@ -109,7 +109,10 @@ export const Cart = () => {
     </div>
   ) : (
     <div>
-      Cosul este momentan gol , <Link to="/">adaugati produse</Link>
+      Cosul este momentan gol ,{" "}
+      <Link className="underline text-blue-700" to="/">
+        adaugati produse
+      </Link>
     </div>
   );
 };
