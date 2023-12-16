@@ -16,10 +16,13 @@ const NavBar = (props) => {
       </div>
       <div className="menu">
         <div>
-          <Link to="/admin">Admin</Link>
+          <Link to="/products">Products</Link>
         </div>
         <div>
           <Link to="/cart">Cart</Link>
+        </div>
+        <div>
+          <Link to="/admin">Admin</Link>
         </div>
       </div>
     </div>

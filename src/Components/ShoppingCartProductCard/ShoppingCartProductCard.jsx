@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import trashIcon from "./trash_icon.png";
 
 const ShoppingCartProductCard = (props) => {
   return (
@@ -49,10 +50,10 @@ const ShoppingCartProductCard = (props) => {
                           +
                         </button>
                         <button
-                          className="border rounded-md py-2 px-4 ml-2 bg-red-600"
+                          className="border rounded-md py-2 px-4 ml-2"
                           onClick={() => props.deleteQuantity(props.productId)}
                         >
-                          Delete
+                          <img src={trashIcon} alt="dsd" />
                         </button>
                       </div>
                     </td>

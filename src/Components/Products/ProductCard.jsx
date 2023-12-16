@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const ProductCard = (props) => {
   const addProductToCart = (e) => {
@@ -47,13 +48,21 @@ const ProductCard = (props) => {
           </p>
           <div className="flex items-center"></div>
         </div>
-        <button
-          id={props.product.id}
-          onClick={addProductToCart}
-          className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
-        >
-          Add to cart
-        </button>
+        <div className="flex justify-around">
+          <button
+            id={props.product.id}
+            onClick={addProductToCart}
+            className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+          >
+            Add to cart
+          </button>
+          <button
+            id={props.product.id}
+            className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+          >
+            <Link to={`/product/${props.product.id}`}>More info..</Link>
+          </button>
+        </div>
       </div>
     </div>
   );

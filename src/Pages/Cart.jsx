@@ -90,7 +90,7 @@ export const Cart = () => {
   ) : (
     <div>
       Cosul este momentan gol ,{" "}
-      <Link className="underline text-blue-700" to="/">
+      <Link className="underline text-blue-700" to="/products">
         adaugati produse
       </Link>
     </div>

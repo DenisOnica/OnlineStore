@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import trashIcon from "../Components/ShoppingCartProductCard/trash_icon.png";
 
 const Admin = () => {
   const [product, setProduct] = useState({
@@ -209,10 +210,10 @@ const Admin = () => {
                 <td>
                   <button
                     id={product.id}
-                    className="border rounded-md py-2 px-4 mr-2 bg-red-600"
+                    className="border rounded-md py-2 px-4 mr-2"
                     onClick={(e) => deleteProduct(e.target.id)}
                   >
-                    Delete
+                    <img src={trashIcon} alt="delete" />
                   </button>
                 </td>
               </tr>
