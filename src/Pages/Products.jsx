@@ -33,6 +33,16 @@ const Products = () => {
     setFilteredProducts(filteredProductsByPrice);
   };
 
+  const filterProductsByName = (e) => {
+    const searchValue = e.target.value.toLowerCase();
+    const filteredProductsByName = products.filter((product) =>
+      product.name.toLowerCase().includes(searchValue)
+    );
+    setFilteredProducts(
+      filteredProductsByName.length > 0 ? filteredProductsByName : null
+    );
+  };
+
   return filteredProducts ? (
     <div>
       <div className="flex gap-4 p-5 text-center text-2xl">
@@ -59,6 +69,9 @@ const Products = () => {
             }}
           />
           <label htmlFor="filter2"> &gt; 500 lei</label>
+        </div>
+        <div>
+          <input type="search" onChange={(e) => filterProductsByName(e)} />
         </div>
       </div>
 
