@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ProductsContainer from "../Components/ProductsContainer/ProductsContainer";
+import Searchbar from "../Components/Searchbar/Searchbar";
 
 const Products = () => {
   const [products, setProducts] = useState(null);
@@ -43,42 +44,44 @@ const Products = () => {
     );
   };
 
-  return filteredProducts ? (
+  return (
     <div>
-      <div className="flex gap-4 p-5 text-center text-2xl">
-        <div>
-          <input
-            className="h-6 w-6"
-            type="checkbox"
-            name="filter1"
-            id="filter1"
-            onChange={(e) => {
-              onChangeFilteredPrice(e, 0, 499);
-            }}
-          />
-          <label htmlFor="filter1">0 - 499 lei</label>
-        </div>
-        <div>
-          <input
-            className="h-6 w-6"
-            type="checkbox"
-            name="filter2"
-            id="filter1"
-            onChange={(e) => {
-              onChangeFilteredPrice(e, 500, Infinity);
-            }}
-          />
-          <label htmlFor="filter2"> &gt; 500 lei</label>
-        </div>
-        <div>
-          <input type="search" onChange={(e) => filterProductsByName(e)} />
+      <div className="flex gap-4 p-5 text-center text-2xl justify-center flex-col">
+        <Searchbar filterProductsByName={(e) => filterProductsByName(e)} />
+        <div className="flex flex-row gap-4 p-5">
+          <div>
+            <input
+              className="h-6 w-6"
+              type="checkbox"
+              name="filter1"
+              id="filter1"
+              onChange={(e) => {
+                onChangeFilteredPrice(e, 0, 499);
+              }}
+            />
+            <label htmlFor="filter1">0 - 499 lei</label>
+          </div>
+          <div>
+            <input
+              className="h-6 w-6"
+              type="checkbox"
+              name="filter2"
+              id="filter1"
+              onChange={(e) => {
+                onChangeFilteredPrice(e, 500, Infinity);
+              }}
+            />
+            <label htmlFor="filter2"> &gt; 500 lei</label>
+          </div>
         </div>
       </div>
-
-      <ProductsContainer products={filteredProducts} />
+      {filteredProducts ? (
+        <ProductsContainer products={filteredProducts} />
+      ) : (
+        <div>Loading...</div>
+      )}
+      ;
     </div>
-  ) : (
-    <div>Loading...</div>
   );
 };
 
