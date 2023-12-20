@@ -59,7 +59,7 @@ const Products = () => {
                 onChangeFilteredPrice(e, 0, 499);
               }}
             />
-            <label htmlFor="filter1">0 - 499 lei</label>
+            <label htmlFor="filter1">0 - 499 $</label>
           </div>
           <div>
             <input
@@ -71,7 +71,7 @@ const Products = () => {
                 onChangeFilteredPrice(e, 500, Infinity);
               }}
             />
-            <label htmlFor="filter2"> &gt; 500 lei</label>
+            <label htmlFor="filter2"> &gt; 500 $</label>
           </div>
         </div>
       </div>
@@ -80,7 +80,6 @@ const Products = () => {
       ) : (
         <div>Loading...</div>
       )}
-      ;
     </div>
   );
 };
