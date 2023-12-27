@@ -172,26 +172,31 @@ const Admin = () => {
         </div>
       </div>
       <div>
-        <table>
+        <table className="min-w-full table-fixed">
           <thead>
-            <th>Name</th>
-            <th>Image URL</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th className="w-1/6">Name</th>
+            <th className="w-1/6">Image URL</th>
+            <th className="w-1/6">Price</th>
+            <th className="w-1/6">Description</th>
+            <th className="w-1/6">Edit</th>
+            <th className="w-1/6">Delete</th>
           </thead>
 
           <tbody>
             {products.map((product) => (
-              <tr key={product.id}>
-                <td>{product.name}</td>
-                <td>
-                  <img src={product.imageURL} alt="product image" width={80} />
+              <tr key={product.id} className="border-b">
+                <td className="py-2 text-center">{product.name}</td>
+                <td className="py-2 text-center ">
+                  <img
+                    src={product.imageURL}
+                    alt="product image"
+                    width={80}
+                    className="m-auto"
+                  />
                 </td>
-                <td>{product.price}</td>
-                <td>{product.description}</td>
-                <td>
+                <td className="py-2 text-center">{product.price}</td>
+                <td className="py-2 text-center">{product.description}</td>
+                <td className="flex items-center justify-center space-x-2 py-2">
                   <button
                     className="border rounded-md py-2 px-4 mr-2"
                     id={product.id}
@@ -210,7 +215,7 @@ const Admin = () => {
                 <td>
                   <button
                     id={product.id}
-                    className="border rounded-md py-2 px-4 mr-2"
+                    className="border rounded-md py-2 px-4 block m-auto"
                     onClick={(e) => deleteProduct(e.target.id)}
                   >
                     <img src={trashIcon} alt="delete" />
