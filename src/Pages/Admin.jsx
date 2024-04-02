@@ -14,9 +14,11 @@ const Admin = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await fetch(
-        "https://652bdb8ed0d1df5273eecf9b.mockapi.io/products"
+        // "https://652bdb8ed0d1df5273eecf9b.mockapi.io/products"
+        "http://localhost:3000/api/products"
       );
       const products = await response.json();
+      console.log(products);
       setProducts(products);
     };
 
@@ -24,7 +26,7 @@ const Admin = () => {
   }, []);
 
   const addNewProduct = async () => {
-    const url = "https://652bdb8ed0d1df5273eecf9b.mockapi.io/products";
+    const url = "http://localhost:3000/api/products"; //"https://652bdb8ed0d1df5273eecf9b.mockapi.io/products";
     const options = {
       method: "POST",
       headers: {
@@ -38,7 +40,7 @@ const Admin = () => {
       let updatedResponse;
       if (response.ok) {
         updatedResponse = await fetch(
-          "https://652bdb8ed0d1df5273eecf9b.mockapi.io/products"
+          "http://localhost:3000/api/products" //"https://652bdb8ed0d1df5273eecf9b.mockapi.io/products"
         );
       }
       const updatedProducts = await updatedResponse.json();
@@ -49,7 +51,7 @@ const Admin = () => {
   };
 
   const editProduct = async (productID) => {
-    const url = `https://652bdb8ed0d1df5273eecf9b.mockapi.io/products/${productID}`;
+    const url = `http://localhost:3000/api/products/${productID}`; //`https://652bdb8ed0d1df5273eecf9b.mockapi.io/products/${productID}`;
     const options = {
       method: "PUT",
       headers: {
@@ -62,7 +64,7 @@ const Admin = () => {
       let updatedResponse;
       if (response.ok) {
         updatedResponse = await fetch(
-          "https://652bdb8ed0d1df5273eecf9b.mockapi.io/products"
+          "http://localhost:3000/api/products" //"https://652bdb8ed0d1df5273eecf9b.mockapi.io/products"
         );
       }
       const updatedProducts = await updatedResponse.json();
@@ -73,7 +75,7 @@ const Admin = () => {
   };
 
   const deleteProduct = async (productID) => {
-    const url = `https://652bdb8ed0d1df5273eecf9b.mockapi.io/products/${productID}`;
+    const url = `http://localhost:3000/api/products/${productID}`; //`https://652bdb8ed0d1df5273eecf9b.mockapi.io/products/${productID}`;
     const options = {
       method: "DELETE",
       headers: {
@@ -83,7 +85,7 @@ const Admin = () => {
     const response = await fetch(url, options);
     if (response.ok) {
       const updatedProducts = products.filter(
-        (product) => product.id != productID
+        (product) => product._id != productID
       );
       setProducts(updatedProducts);
     }
@@ -165,7 +167,7 @@ const Admin = () => {
           </button>
           <button
             className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-20"
-            onClick={() => editProduct(product.id)}
+            onClick={() => editProduct(product._id)}
           >
             Save
           </button>
@@ -184,7 +186,7 @@ const Admin = () => {
 
           <tbody>
             {products.map((product) => (
-              <tr key={product.id} className="border-b">
+              <tr key={product._id} className="border-b">
                 <td className="py-2 text-center">{product.name}</td>
                 <td className="py-2 text-center ">
                   <img
@@ -199,12 +201,13 @@ const Admin = () => {
                 <td className="flex items-center justify-center space-x-2 py-2">
                   <button
                     className="border rounded-md py-2 px-4 mr-2"
-                    id={product.id}
+                    id={product._id}
                     onClick={(e) => {
                       const productID = e.target.id;
+                      console.log(e.target.id);
                       setCurrentProductID(productID);
                       const productToBeEdited = products.find(
-                        (product) => product.id === productID
+                        (product) => product._id === productID
                       );
                       setProduct(productToBeEdited);
                     }}
@@ -214,11 +217,11 @@ const Admin = () => {
                 </td>
                 <td>
                   <button
-                    id={product.id}
+                    id={product._id}
                     className="border rounded-md py-2 px-4 block m-auto"
                     onClick={(e) => deleteProduct(e.target.id)}
                   >
-                    <img src={trashIcon} alt="delete" />
+                    <img src={trashIcon} alt="delete" id={product._id} />
                   </button>
                 </td>
               </tr>

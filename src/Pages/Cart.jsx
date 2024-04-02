@@ -11,7 +11,8 @@ export const Cart = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await fetch(
-        "https://652bdb8ed0d1df5273eecf9b.mockapi.io/products"
+        //"https://652bdb8ed0d1df5273eecf9b.mockapi.io/products"
+        "http://localhost:3000/api/products"
       );
       const products = await response.json();
       setProducts(products);
@@ -21,33 +22,45 @@ export const Cart = () => {
   }, []);
 
   const getProductById = (id) => {
-    const product = products.find((product) => product.id === id);
+    const product = products.find((product) => product._id === id);
     return product;
   };
 
-  const handleProductQuantity = (productsInCart, prodyctId, action) => {
-    const currentProduct = productsInCart.find(
-      (product) => product.id === prodyctId
-    );
-    const indexOfProductToBeDeleted = productsInCart.indexOf(currentProduct);
-    console.log(indexOfProductToBeDeleted);
+  const handleProductQuantity = (productsInCart, productId, action) => {
+    // Inside handleProductQuantity function:
+    let updatedProductsInCart;
     switch (action) {
       case "decrease":
-        if (currentProduct.qt > 1) currentProduct.qt--;
+        updatedProductsInCart = productsInCart.map((product) => {
+          console.log(product.id);
+          if (product.id === productId && product.qt > 1) {
+            return { ...product, qt: product.qt - 1 };
+          }
+          return product;
+        });
         break;
       case "increase":
-        currentProduct.qt++;
+        updatedProductsInCart = productsInCart.map((product) => {
+          if (product.id === productId) {
+            return { ...product, qt: product.qt + 1 };
+          }
+          return product;
+        });
         break;
       case "delete":
-        productsInCart.splice(indexOfProductToBeDeleted, 1);
+        updatedProductsInCart = productsInCart.filter(
+          (product) => product.id !== productId
+        );
+        break;
     }
 
-    if (productsInCart.length === 0) {
+    // Update local storage and state
+    if (updatedProductsInCart.length === 0) {
       localStorage.removeItem("cart");
       setProductsInCart(null);
     } else {
-      localStorage.setItem("cart", JSON.stringify(productsInCart));
-      setProductsInCart(productsInCart);
+      localStorage.setItem("cart", JSON.stringify(updatedProductsInCart));
+      setProductsInCart(updatedProductsInCart);
     }
   };
 
@@ -76,9 +89,9 @@ export const Cart = () => {
         return (
           <ShoppingCartProductCard
             key={productInCart.id}
-            imageURL={product.imageURL}
-            name={product.name}
-            price={product.price}
+            imageURL={product ? product.imageURL : ""}
+            name={product ? product.name : ""}
+            price={product ? product.price : ""}
             qt={productInCart.qt}
             decreaseQuantity={() => decreaseQuantity(productInCart.id)}
             increaseQuantity={() => increaseQuantity(productInCart.id)}

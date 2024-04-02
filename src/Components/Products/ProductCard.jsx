@@ -10,9 +10,11 @@ const ProductCard = (props) => {
     const productAlreadyAdded = productsInCart.find(
       (product) => product.id === e.target.id
     );
+    console.log(productAlreadyAdded);
     if (productAlreadyAdded) {
       productAlreadyAdded.qt++;
     } else {
+      console.log(e.target.id);
       productsInCart.push({ id: e.target.id, qt: 1 });
     }
 
@@ -21,7 +23,7 @@ const ProductCard = (props) => {
 
   return (
     <div
-      key={props.product.id}
+      key={props.product._id}
       className="relative m-10 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md"
     >
       <a
@@ -50,17 +52,17 @@ const ProductCard = (props) => {
         </div>
         <div className="flex justify-around">
           <button
-            id={props.product.id}
+            id={props.product._id}
             onClick={addProductToCart}
             className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
           >
             Add to cart
           </button>
           <button
-            id={props.product.id}
+            id={props.product._id}
             className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
           >
-            <Link to={`/product/${props.product.id}`}>More info..</Link>
+            <Link to={`/product/${props.product._id}`}>More info..</Link>
           </button>
         </div>
       </div>
@@ -70,7 +72,7 @@ const ProductCard = (props) => {
 
 ProductCard.propTypes = {
   product: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    _id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     imageURL: PropTypes.string.isRequired,

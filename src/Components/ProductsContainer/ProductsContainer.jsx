@@ -7,7 +7,7 @@ const ProductsContainer = (props) => {
   return (
     <div className={ProductsContainerTailwindClasses}>
       {props.products.map((product) => (
-        <div key={product.id}>
+        <div key={product._id}>
           <ProductCard product={product} />
         </div>
       ))}

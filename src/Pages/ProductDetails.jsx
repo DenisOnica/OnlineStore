@@ -8,9 +8,11 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProductDetails = async () => {
       const response = await fetch(
-        `https://652bdb8ed0d1df5273eecf9b.mockapi.io/products/${id}`
+        //`https://652bdb8ed0d1df5273eecf9b.mockapi.io/products/${id}`
+        `http://localhost:3000/api/products/${id}`
       );
       const productDetails = await response.json();
+      console.log(productDetails);
       setProduct(productDetails);
     };
 
@@ -29,6 +31,7 @@ const ProductDetails = () => {
     const productAlreadyAdded = productsInCart.find(
       (product) => product.id === id
     );
+
     if (productAlreadyAdded) {
       productAlreadyAdded.qt++;
     } else {
