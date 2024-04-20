@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import ReviewSection from "../Components/ReviewSection/ReviewSection";
+
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -42,28 +44,33 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-8" key={product.id}>
-      <div className="bg-white p-6 rounded-lg shadow-md flex">
-        <div className="flex-shrink-0">
-          <img
-            src={product.imageURL}
-            alt={product.name}
-            className="h-48 w-48 object-cover rounded-md p-2"
-          />
+    <div>
+      <div className="max-w-2xl mx-auto mt-8" key={product.id}>
+        <div className="bg-white p-6 rounded-lg shadow-md flex">
+          <div className="flex-shrink-0">
+            <img
+              src={product.imageURL}
+              alt={product.name}
+              className="h-48 w-48 object-cover rounded-md p-2"
+            />
+          </div>
+          <div className="ml-6">
+            <h1 className="text-2xl font-bold mb-4">{product.name}</h1>
+            <p className="text-gray-700 mb-4">{product.description}</p>
+            <p className="text-gray-800 text-lg font-semibold mb-4">
+              Price: ${product.price}
+            </p>
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+              onClick={addProductToCart}
+            >
+              Add to Cart
+            </button>
+          </div>
         </div>
-        <div className="ml-6">
-          <h1 className="text-2xl font-bold mb-4">{product.name}</h1>
-          <p className="text-gray-700 mb-4">{product.description}</p>
-          <p className="text-gray-800 text-lg font-semibold mb-4">
-            Price: ${product.price}
-          </p>
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-            onClick={addProductToCart}
-          >
-            Add to Cart
-          </button>
-        </div>
+      </div>
+      <div className="mt-8">
+        <ReviewSection />
       </div>
     </div>
   );
