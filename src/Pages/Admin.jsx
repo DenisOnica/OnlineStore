@@ -204,7 +204,6 @@ const Admin = () => {
                     id={product._id}
                     onClick={(e) => {
                       const productID = e.target.id;
-                      console.log(e.target.id);
                       setCurrentProductID(productID);
                       const productToBeEdited = products.find(
                         (product) => product._id === productID
