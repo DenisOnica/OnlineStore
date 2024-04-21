@@ -70,7 +70,7 @@ const ProductDetails = () => {
         </div>
       </div>
       <div className="mt-8">
-        <ReviewSection />
+        <ReviewSection id={id} />
       </div>
     </div>
   );

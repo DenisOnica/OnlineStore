@@ -1,18 +1,40 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import "./ReviewSection.css";
 
-const ReviewSection = () => {
+const ReviewSection = ({ id }) => {
   const [reviews, setReviews] = useState([]);
 
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (name.trim() !== "" && comment.trim() !== "") {
-      setReviews([...reviews, { name, comment }]);
-      setName("");
-      setComment("");
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/products/${id}`, // Update the endpoint to include '/reviews'
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name, comment }), // Send individual fields directly
+          }
+        );
+
+        if (response.ok) {
+          const updatedProduct = await response.json();
+          setReviews(updatedProduct.reviews);
+          setName("");
+          setComment("");
+        } else {
+          throw new Error("Failed to add review");
+        }
+      } catch (error) {
+        console.error("Error adding review:", error);
+        alert("Failed to add review. Please try again.");
+      }
     } else {
       alert("Please fill out both fields.");
     }
@@ -52,6 +74,10 @@ const ReviewSection = () => {
       </div>
     </div>
   );
+};
+
+ReviewSection.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 export default ReviewSection;
