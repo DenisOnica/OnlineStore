@@ -19,6 +19,31 @@ const ProductCard = (props) => {
     }
 
     window.localStorage.setItem("cart", JSON.stringify(productsInCart));
+
+    countAddToCart(e.target.id);
+  };
+
+  const countAddToCart = async (id) => {
+    try {
+      console.log(id);
+      const response = await fetch(
+        `http://localhost:3000/api/products/${id}/add-to-cart`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: id }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to indicate product purchase");
+      }
+
+      console.log("Product added to cart successfully");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (

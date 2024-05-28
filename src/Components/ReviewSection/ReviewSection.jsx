@@ -13,13 +13,13 @@ const ReviewSection = ({ id }) => {
     if (name.trim() !== "" && comment.trim() !== "") {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/products/${id}`, // Update the endpoint to include '/reviews'
+          `http://localhost:3000/api/products/${id}`,
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ name, comment }), // Send individual fields directly
+            body: JSON.stringify({ name, comment }),
           }
         );
 

@@ -82,6 +82,38 @@ export const Cart = () => {
     handleProductQuantity(productsInCart, productId, "delete");
   };
 
+  const getTotalPrice = () => {
+    let totalPrice = 0;
+    productsInCart.forEach((productInCart) => {
+      const product = getProductById(productInCart.id);
+      if (product) {
+        totalPrice += product.price * productInCart.qt;
+      }
+    });
+    return totalPrice;
+  };
+
+  // Function to handle buy button click
+  const handleBuyButtonClick = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/purchase", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productsInCart), // Sending the list of products in the cart
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to process purchase");
+      }
+
+      console.log("Purchase successful");
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return products && productsInCart ? (
     <div>
       {productsInCart.map((productInCart) => {
@@ -99,6 +131,19 @@ export const Cart = () => {
           />
         );
       })}
+
+      <div className="mt-8 flex items-baseline gap-2">
+        <div className="text-lg font-semibold">Total Price:</div>
+        <div className="text-xl font-bold text-green-600">
+          {getTotalPrice()}
+        </div>
+      </div>
+      <button
+        className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 font-bold"
+        onClick={handleBuyButtonClick}
+      >
+        Buy
+      </button>
     </div>
   ) : (
     <div>

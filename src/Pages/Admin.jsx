@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import trashIcon from "../Components/ShoppingCartProductCard/trash_icon.png";
+import { Link } from "react-router-dom";
 
 const Admin = () => {
   const [product, setProduct] = useState({
@@ -182,6 +183,7 @@ const Admin = () => {
             <th className="w-1/6">Description</th>
             <th className="w-1/6">Edit</th>
             <th className="w-1/6">Delete</th>
+            <th className="w-1/6">Statistics</th>
           </thead>
 
           <tbody>
@@ -221,6 +223,11 @@ const Admin = () => {
                     onClick={(e) => deleteProduct(e.target.id)}
                   >
                     <img src={trashIcon} alt="delete" id={product._id} />
+                  </button>
+                </td>
+                <td className="flex items-center justify-center space-x-2 py-2">
+                  <button className="border rounded-md py-2 px-4 mr-2">
+                    <Link to={`/statistics/${product._id}`}>Statistics</Link>
                   </button>
                 </td>
               </tr>
