@@ -11,7 +11,6 @@ export const Cart = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await fetch(
-        //"https://652bdb8ed0d1df5273eecf9b.mockapi.io/products"
         "http://localhost:3000/api/products"
       );
       const products = await response.json();
@@ -27,7 +26,6 @@ export const Cart = () => {
   };
 
   const handleProductQuantity = (productsInCart, productId, action) => {
-    // Inside handleProductQuantity function:
     let updatedProductsInCart;
     switch (action) {
       case "decrease":
@@ -54,7 +52,6 @@ export const Cart = () => {
         break;
     }
 
-    // Update local storage and state
     if (updatedProductsInCart.length === 0) {
       localStorage.removeItem("cart");
       setProductsInCart(null);
@@ -93,7 +90,6 @@ export const Cart = () => {
     return totalPrice;
   };
 
-  // Function to handle buy button click
   const handleBuyButtonClick = async () => {
     try {
       const response = await fetch("http://localhost:3000/api/purchase", {

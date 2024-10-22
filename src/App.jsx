@@ -16,7 +16,7 @@ function App() {
       <NavBar color="white" textColor="black" />
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Products />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/products" element={<Products />} />

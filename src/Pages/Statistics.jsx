@@ -15,7 +15,6 @@ const StatisticsPage = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // Fetch product data from your API
     axios
       .get("http://localhost:3000/api/products")
       .then((response) => setProducts(response.data))

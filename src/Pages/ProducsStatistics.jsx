@@ -1,4 +1,4 @@
-// src/ProductStatisticsPage.js
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -17,7 +17,6 @@ const ProductStatistics = () => {
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    // Fetch product data from your API
     axios
       .get(`http://localhost:3000/api/products/${productId}`)
       .then((response) => setProduct(response.data))
@@ -31,7 +30,6 @@ const ProductStatistics = () => {
   }
 
   const { name, addToCartCount, purchaseCount, avg_polarity } = product;
-  console.log(name, addToCartCount, purchaseCount, avg_polarity);
 
   const data = [
     { name: "Add to Cart Count", value: addToCartCount },

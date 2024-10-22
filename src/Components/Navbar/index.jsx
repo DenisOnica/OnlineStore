@@ -19,7 +19,7 @@ const NavBar = (props) => {
     >
       <div className={`menu ${isMenuOpen ? "open" : ""} p-4 gap-4`}>
         <div className="logo">
-          <Link to="/">Home</Link>
+          <Link to="/statistics">Statistics</Link>
         </div>
         <div>
           <Link to="/products">Products</Link>

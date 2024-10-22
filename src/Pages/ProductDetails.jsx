@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import ReviewSection from "../Components/ReviewSection/ReviewSection";
+import ChatBot from "../Components/ChatBot/ChatBot";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -97,6 +98,7 @@ const ProductDetails = () => {
       <div className="mt-8">
         <ReviewSection id={id} />
       </div>
+      <ChatBot />
     </div>
   );
 };
